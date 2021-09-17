@@ -1,9 +1,12 @@
 import React from 'react';
 //import Form from './components/Form';
-import Form from './components/Form';
-import List from './components/List';
-import { StoreProvider } from './Store/Store';
+//import Form from './components/Form';
+//import List from './components/List';
 
+import { StoreProvider } from './Store/Store';
+import ListG from './components/ListG';
+import ListF from './components/ListF';
+//import List from './components/List';
 //const HOST_API = "http://localhost:8080/api";
 
 /*const initialState = {
@@ -205,15 +208,21 @@ const Store = createContext(initialState)*/
 }*/
 
 function App() {
-  return <StoreProvider>
-    <h3 id="aa">To-Do List - Reto</h3>
-    <Form />
-    <List />
+  return (<StoreProvider>
+    <div>
+    <ListF />
+    <div>
+      <h3 id="aa">To-Do List - Reto</h3>
+      <div>
+        <h1>**********</h1>
+        
+       
+      </div>
+      <ListG />
+    </div>
+    </div>
   </StoreProvider>
-
-
-
-
+  )
 }
 
 export default App;

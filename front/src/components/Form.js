@@ -1,10 +1,10 @@
-import React, { useRef, useContext, useState, createContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import Store from '../Store/Store';
 
-const HOST_API = "http://localhost:8080/api/todo";
+const HOST_API = "http://localhost:8080/api";
 
 
-const Form = () => {
+const Form = ({categoryId}) => {
 
     const formRef = useRef(null);
     const { dispatch, state: { todo } } = useContext(Store);
@@ -17,11 +17,13 @@ const Form = () => {
         const request = {
             name: state.name,
             id: null,
-            completed: false
+            completed: false,
+            listFId: categoryId
         };
 
 
         fetch(HOST_API + "/todo", {
+
             method: "POST",
             body: JSON.stringify(request),
             headers: {
@@ -50,10 +52,10 @@ const Form = () => {
             method: "PUT",
             body: JSON.stringify(request),
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((todo) => {
                 dispatch({ type: "update-item", item: todo });
                 setState({ name: "" });
@@ -65,13 +67,13 @@ const Form = () => {
         <input
             type="text"
             name="name"
-            placeholder="¿Qué piensas hacer hoy?"
+            placeholder="Lista TO-DO"
             defaultValue={item.name}
             onChange={(event) => {
                 setState({ ...state, name: event.target.value })
             }}  ></input>
-        {item.id && <button id="btn" onClick={onEdit}>Actualizar</button>}
-        {!item.id && <button id="btn" onClick={onAdd}>Crear</button>}
+        {item.id && <button onClick={onEdit}>Actualizar</button>}
+        {!item.id && <button id="btn" onClick={onAdd}>Nueva Lista</button>}
     </form>);
 }
 

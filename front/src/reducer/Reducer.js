@@ -19,10 +19,21 @@ export function reducer(state, action) {
             });
             todoUpDelete.list = listUpdate;
             return { ...state, todo: todoUpDelete }
+        case 'delete-master-list':
+            const masterListUpDelete = state.listF;
+            const masterListUpdated = masterListUpDelete.list.filter((item) => {
+                return item.id !== action.id;
+            });
+            masterListUpDelete.list = masterListUpdated;
+            return { ...state, listF: masterListUpDelete }
         case 'update-list':
             const todoUpList = state.todo;
             todoUpList.list = action.list;
             return { ...state, todo: todoUpList }
+        case 'list-master-list':
+            const masterUpList = state.listF;
+            masterUpList.list = action.list;
+            return { ...state, listF: masterUpList }
         case 'edit-item':
             const todoUpEdit = state.todo;
             todoUpEdit.item = action.item;
@@ -31,10 +42,16 @@ export function reducer(state, action) {
             const todoUp = state.todo.list;
             todoUp.push(action.item);
             return { ...state, todo: { list: todoUp, item: {} } }
+        case 'add-master-list':
+            const masterListUp = state.listF.list;
+            masterListUp.push(action.item);
+            return { ...state, listF: { list: masterListUp, item: {} } }
+
         default:
             return state;
     }
 }
+
 
 
 
