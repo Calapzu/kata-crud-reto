@@ -6,6 +6,7 @@ import React from 'react';
 import { StoreProvider } from './Store/Store';
 import ListG from './components/ListG';
 import ListF from './components/ListF';
+import Form from './components/Form';
 //import List from './components/List';
 //const HOST_API = "http://localhost:8080/api";
 
@@ -210,16 +211,16 @@ const Store = createContext(initialState)*/
 function App() {
   return (<StoreProvider>
     <div>
-    <ListF />
-    <div>
-      <h3 id="aa">To-Do List - Reto</h3>
+
       <div>
-        <h1>**********</h1>
-        
-       
+        <h3 id="aa">To-Do List - Reto</h3>
+        <div>
+          <h1>**********</h1>
+          <ListF />
+          <ListG />
+        </div>
+
       </div>
-      <ListG />
-    </div>
     </div>
   </StoreProvider>
   )

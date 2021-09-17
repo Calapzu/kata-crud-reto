@@ -1,9 +1,12 @@
 import React, { useRef, useState, useContext } from 'react';
 import Store from '../Store/Store';
 
+
+
+
 const HOST_API = "http://localhost:8080/api";
 
-const ListF = () => {
+const ListF = ({category}) => {
     const formRef = useRef(null);
     const { dispatch, state: { listF, todo } } = useContext(Store);
     const item = listF.item;
@@ -42,12 +45,12 @@ const ListF = () => {
                 <input
                     type="text"
                     name="name"
-                    placeholder="Lista de TO-DO"
+                    placeholder="Lista de TO-DO ListF"
                     onChange={(event) => {
                         setState({ ...state, name: event.target.value })
                     }}
                 ></input>
-                <button onClick={onAdd}>Nueva Lista</button>
+                <button id="btn" onClick={onAdd}>Nueva Lista</button>
             </form>
         </div >
     );

@@ -4,7 +4,7 @@ import Store from '../Store/Store';
 const HOST_API = "http://localhost:8080/api";
 
 
-const Form = ({categoryId}) => {
+const Form = ({ categoryId }) => {
 
     const formRef = useRef(null);
     const { dispatch, state: { todo } } = useContext(Store);
@@ -63,18 +63,22 @@ const Form = ({categoryId}) => {
             });
     }
 
-    return (<form ref={formRef}>
-        <input
-            type="text"
-            name="name"
-            placeholder="Lista TO-DO"
-            defaultValue={item.name}
-            onChange={(event) => {
-                setState({ ...state, name: event.target.value })
-            }}  ></input>
-        {item.id && <button onClick={onEdit}>Actualizar</button>}
-        {!item.id && <button id="btn" onClick={onAdd}>Nueva Lista</button>}
-    </form>);
+    return (
+        <div>
+            <form ref={formRef}>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Lista TO-DO"
+                    defaultValue={item.name}
+                    onChange={(event) => {
+                        setState({ ...state, name: event.target.value })
+                    }}  ></input>
+                {item.id && <button onClick={onEdit}>Actualizar</button>}
+                {!item.id && <button id="btn" onClick={onAdd}>Nueva Lista</button>}
+            </form>
+        </div>
+    );
 }
 
 export default Form;

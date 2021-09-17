@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import Store from '../Store/Store';
 import Form from './Form';
+
 import List from './List';
+
 
 const HOST_API = "http://localhost:8080/api/";
 
@@ -18,7 +20,7 @@ const ListG = () => {
     useEffect(() => {
         fetch(HOST_API + "/ListF")
             .then(response => response.json())
-            .then((grupoList) => {
+            .then(() => {
                 dispatch({ type: "list-master-list",})
             })
     }, [dispatch]);
@@ -94,10 +96,12 @@ const ListG = () => {
                             </div>
                             <Form categoryId={category.id} />
                             <List categoryId={category.id} todo={category.TodoDto} />
+      
                         </div>
                     )
 
                 }) : < p > Lista Vacia</p >
+                
 
             }
         </div>
