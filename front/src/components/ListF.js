@@ -1,19 +1,26 @@
 import React, { useRef, useState, useContext } from 'react';
 import Store from '../Store/Store';
 
-
+import { useForm } from "react-hook-form";
 
 
 const HOST_API = "http://localhost:8080/api";
 
-const ListF = ({category}) => {
+const ListF = ({ category }) => {
     const formRef = useRef(null);
     const { dispatch, state: { listF, todo } } = useContext(Store);
     const item = listF.item;
     const [state, setState] = useState(item);
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
     console.log("Estate name: " + state)
     console.log("Estate Todo: " + todo)
+
+    const onSubmit = (event) => {
+        event.target.reset()
+    }
+
 
     const onAdd = (event) => {
         event.preventDefault();
@@ -41,16 +48,30 @@ const ListF = ({category}) => {
 
     return (
         <div>
-            <form ref={formRef}>
+            <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
                 <input
                     type="text"
                     name="name"
                     placeholder="Lista de TO-DO ListF"
+                    {
+                    ...register("name", {
+                        required: {
+                            value: true,
+                            message: 'Campo obligatorio',
+
+                        },
+                        minLength: {
+                            value: 2,
+                            message: 'Minimo dos letras'
+                        }
+                    })
+                    }
                     onChange={(event) => {
                         setState({ ...state, name: event.target.value })
                     }}
                 ></input>
-                <button id="btn" onClick={onAdd}>Nueva Lista</button>
+                {errors.name?.type === 'required' && "Campo obligatorio"}
+                <button id="btn" onClick={onAdd}>Nueva Lista F</button>
             </form>
         </div >
     );
