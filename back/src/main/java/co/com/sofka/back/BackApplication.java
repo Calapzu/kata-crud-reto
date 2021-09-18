@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan("co.com.sofka.back.map")
-//@EntityScan("com.delivery.domain")
-//@EnableJpaRepositories("com.delivery.repository")
 public class BackApplication {
 
 	public static void main(String[] args) {
